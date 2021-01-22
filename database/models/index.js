@@ -5,6 +5,9 @@ const Student = require('./student')
 //export campus model
 const Campus = require("./campus")
 
+Campus.hasMany(Student);
+Student.belongsTo(Campus);
+
 module.exports = {
   Student,
   Campus
