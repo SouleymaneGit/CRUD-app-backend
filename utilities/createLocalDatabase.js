@@ -1,12 +1,15 @@
 const pgtools = require('pgtools');
 
 // An object with user, host, port, and password properties;
-const config = {
-  user: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  password: process.env.LOCAL_DATABASE_PASSWORD
-};
+// const config = {
+//   user: 'postgres',
+//   host: 'localhost',
+//   port: 5432,
+// //   password: process.env.LOCAL_DATABASE_PASSWORD
+//       password: textbest2
+// };
+
+const config = "postgres://postgres:textbest2@localhost:5432/crudappbackend"
 
 // The name of the database to create;
 const databaseName = require('./databaseName');
