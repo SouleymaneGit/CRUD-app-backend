@@ -9,15 +9,18 @@ const databaseName = require('../utilities/databaseName');
 console.log('Opening database connection');
 
 // This is our entry point, we instantiate the Sequelize instance accordingly;
-// const db = new Sequelize(process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`, { logging: false });
+//switch username and password with your psql username and password
+//${databaseName} should match package.json.name, in this case it is posteriorchain, if they dont match you may get errors
+ const sequelize = new Sequelize(process.env.DATABASE_URL || `postgres://username:password@localhost:5432/${databaseName}`);
 
-const sequelize = new Sequelize(process.env.DATABASE_URL || `postgres://postgres:textbest2@localhost:5432/${databaseName}`);
-
-sequelize.authenticate().then(() => {
-    console.log("connection success");
-}).catch(err => {
-    console.error("cant connect", err);
-});
+//authenticate database connection w/ server
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 // Export our instance of Sequelize, which will be modified with models;
 module.exports = sequelize;

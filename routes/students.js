@@ -1,21 +1,22 @@
-// const express = require('express');
+const express = require('express');
+const router = express.Router();
+const models = require('../database/models');
 
-// const router = express.Router();
-// const { Campus, Student } = require('../database/models');
+//gets all data from student table
+router.get('/', (req, res, next) => {
+    models.Student.findAll()
+    .then(students => {
+        res.status(200)
+        .json({
+            message: 'got students',
+            students
+        })
+    })
+    .catch(err => {
+        res.status(200)
+        .json({err})
+    })
 
+})
 
-
-// router.get('/', async (req, res, next) => {
-//   console.log("req.query", req.query);
-//   try{
-//       const allStudents = await Student.findAll()
-//           res.json(allStudents);
-      
-//   }catch(error){
-//       next(error);
-//   }
-// });
-
-
-
-// module.exports = router;
+module.exports = router
