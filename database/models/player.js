@@ -1,23 +1,23 @@
-const Sequelize = require('sequelize');
-const db = require('../db');
+// const Sequelize = require('sequelize');
+// const db = require('../db');
 
-const Player = db.define("player", {
+// const Player = db.define("player", {
 
-  firstName: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
+//   firstName: {
+//     type: Sequelize.STRING,
+//     allowNull: false
+//   },
 
-  lastName: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
+//   lastName: {
+//     type: Sequelize.STRING,
+//     allowNull: false
+//   },
 
-  jerseyNumber: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  }
+//   jerseyNumber: {
+//     type: Sequelize.INTEGER,
+//     allowNull: false
+//   }
 
-});
+// });
 
-module.exports = Player;
+// module.exports = Player;
