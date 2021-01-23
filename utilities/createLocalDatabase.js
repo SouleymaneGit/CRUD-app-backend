@@ -9,7 +9,7 @@ const pgtools = require('pgtools');
 //       password: textbest2
 // };
 
-const config = "postgres://postgres:textbest2@localhost:5432/crudappbackend"
+const config = "postgres://postgres:12345@localhost:5432/crudappbackend"
 
 // The name of the database to create;
 const databaseName = require('./databaseName');
