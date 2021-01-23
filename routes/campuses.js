@@ -1,7 +1,6 @@
 const { response } = require('express');
 const express = require('express');
 
-
 const router = express.Router();
 // const { Campus, Student } = require('../database/models');
 // const { Campus } = require('../database/models');
@@ -58,5 +57,21 @@ router.delete('/:id', async(req, res, next) =>{
 
 module.exports = router;
 
-// adding the new Campus
+// adding a new Campus
+
+router.post('/', (req, res, next) =>{
+
+  try{
+   models.Campus.create({
+      name: req.body.name,
+      imageURL: req.body.imageURL,
+      address: req.body.address,
+      description: req.body.description
+    }).then(
+      res.status(200).send("successfully add a new campus")
+    )
+  }catch(error){
+    console.log(error)
+  }
+})
 
