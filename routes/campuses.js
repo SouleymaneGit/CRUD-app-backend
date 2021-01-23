@@ -42,7 +42,7 @@ router.get('/:id', async (req, res, next) =>{
 
 // delete a single Campus
 
-router.get('/destroy/:id', async(req, res, next) =>{
+router.delete('/:id', async(req, res, next) =>{
   try{
     await models.Campus.destroy({
       where: {
@@ -57,3 +57,6 @@ router.get('/destroy/:id', async(req, res, next) =>{
 })
 
 module.exports = router;
+
+// adding the new Campus
+
