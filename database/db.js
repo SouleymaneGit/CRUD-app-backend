@@ -11,7 +11,7 @@ console.log('Opening database connection');
 // This is our entry point, we instantiate the Sequelize instance accordingly;
 //switch username and password with your psql username and password
 //${databaseName} should match package.json.name, in this case it is posteriorchain, if they dont match you may get errors
- const sequelize = new Sequelize(process.env.DATABASE_URL || `postgres://username:password@localhost:5432/${databaseName}`);
+ const sequelize = new Sequelize(process.env.DATABASE_URL || `postgres://postgres:12345@localhost:5432/${databaseName}`);
 
 //authenticate database connection w/ server
 sequelize.authenticate()

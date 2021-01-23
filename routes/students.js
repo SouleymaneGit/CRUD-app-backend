@@ -18,5 +18,19 @@ router.get('/', (req, res, next) => {
     })
 
 })
+// get a single student using student id
+router.get('/:student_id', async (req, res, next) => {
+    console.log(req.params);
+    try{
+    const student = await models.Student.findAll({
+        where: {
+            id: req.params.student_id
+        }
+    })
+    res.json(student);
+    }catch(error){
+        console.error(error.message);
+    }
+})
 
 module.exports = router

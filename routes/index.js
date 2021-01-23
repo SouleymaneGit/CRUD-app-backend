@@ -3,7 +3,7 @@ const router = express.Router();
 
 // Subrouters;
 // const playersRouter = require('./players');
-const studentsRouter = require('./students')
+const studentsRouter = require('./students');
 const campusRouter = require("./campuses");
 
 // Mount our subrouters to assemble our apiRouter;
