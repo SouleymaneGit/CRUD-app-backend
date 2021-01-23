@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const models = require('../database/models');
+const { includes } = require('../utilities/databaseName');
 
 //gets all data from student table
 router.get('/', (req, res, next) => {
@@ -50,13 +51,14 @@ router.delete('/:student_id', async (req, res, next) => {
 // create a new student
 router.post('/', async (req, res, next) => {
     try {
-        const { first , last , e , image, g } = req.body;
+        const { first , last , e , image, g, campid } = req.body;
         const student = await models.Student.create({
             firstName: first,
             lastName: last,
             email: e,
             imageUrl: image,
-            gpa: g
+            gpa: g,
+            campusId: campid
         })
         res.json("student was added succefully");
     } catch (error) {
