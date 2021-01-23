@@ -20,25 +20,16 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// router.get('/', function(req, res, next) {
-//   Campus.findAll()
-//     .then(campus => res.json(campus))
-//     .catch(err => console.log(err))
-// });
-
-// router.get('/', (req, res, next) => {
-//   models.Campus.findAll()
-//   .then(campuses => {
-//     res.status(200).json({
-//       message: "sucess",
-//       campuses
-//     })
-//   }).catch(err => {
-//     res.status(400).json({err})
-//   })
-// })
-
-
-// route.get("")
+// find a Campus by Id
+router.get('/:id', async (req, res, next) =>{
+  try{
+     const singleCampus = []
+     const result = await models.Campus.findByPk(req.params.id)
+     singleCampus.push(result)
+     res.json(singleCampus)
+  }catch(error){
+     console.log(error);
+  }
+})
 
 module.exports = router;

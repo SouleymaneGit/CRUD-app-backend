@@ -49,6 +49,12 @@ const seedDatabase = async () => {
       address: "1234666",
       description: ""
     }),
+    Campus.create({
+      name: "Lehman",
+      imageURL: "Irving",
+      address: "1234664",
+      description: ""
+    }),
 
   ]);
 }
