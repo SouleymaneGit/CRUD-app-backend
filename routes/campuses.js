@@ -23,10 +23,17 @@ router.get('/', async (req, res, next) => {
 // find a Campus by Id
 router.get('/:id', async (req, res, next) =>{
   try{
-     const singleCampus = []
-     const result = await models.Campus.findByPk(req.params.id)
-     singleCampus.push(result)
-     res.json(singleCampus)
+    await models.Campus.findAll(
+      
+      {
+        where: {id: req.params.id},
+        include:models.Student
+      
+      }
+      
+    ).then(
+      reponse => res.json(reponse)
+    )
   }catch(error){
      console.log(error);
   }
