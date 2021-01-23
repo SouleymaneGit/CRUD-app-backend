@@ -60,3 +60,36 @@ module.exports = router;
 
 // adding the new Campus
 
+
+router.put("/:campus_id", async (req, res, next) => {
+
+  models.Campus.findByPk(req.params.campus_id)
+  .then(campus => {
+      if (!campus)
+      res.status(404)
+      .json({
+        message: "not exist"
+      });
+
+    campus.update({
+        name: req.body.name,
+        imageURL: req.body.imageURL,
+        address: req.body.address,
+        description: req.body.description,
+        
+    });
+
+    campus.save();
+
+    res.status(200).json({
+        message: "update success",
+        campus
+    })
+  })
+  .catch(err => {
+      res.status(500).json({
+          message: "error",err
+      })
+  
+})
+})
