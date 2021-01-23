@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 
 
@@ -20,7 +21,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// find a Campus by Id
+// find a Campus by Id and all its students
 router.get('/:id', async (req, res, next) =>{
   try{
     await models.Campus.findAll(
@@ -39,4 +40,23 @@ router.get('/:id', async (req, res, next) =>{
   }
 })
 
+// delete a single Campus
+
+router.delete('/:id', async(req, res, next) =>{
+  try{
+    await models.Campus.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(
+      reponse => res.send('The Campus with the id number:'+req.params.id+' has been deleted')
+    )
+  }catch(error){
+    console.log(error);
+  }
+})
+
 module.exports = router;
+
+// adding the new Campus
+
