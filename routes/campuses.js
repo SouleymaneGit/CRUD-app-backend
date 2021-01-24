@@ -76,6 +76,7 @@ router.post('/', (req, res, next) =>{
 })
 
 
+//update a Campus
 router.put("/:campus_id", async (req, res, next) => {
 
   models.Campus.findByPk(req.params.campus_id)
