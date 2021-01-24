@@ -61,18 +61,16 @@ module.exports = router;
 
 router.post('/', (req, res, next) =>{
 
-  try{
    models.Campus.create({
       name: req.body.name,
       imageURL: req.body.imageURL,
       address: req.body.address,
       description: req.body.description
-    }).then(
-      res.status(200).send("successfully add a new campus")
-    )
-  }catch(error){
-    console.log(error)
-  }
+    })
+    .then(campus => res.status(200).send(campus))
+  .catch(error =>{
+    res.status(500).send('error adding student' + error)
+  })
 })
 
 

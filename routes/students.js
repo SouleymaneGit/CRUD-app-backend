@@ -5,7 +5,9 @@ const { includes } = require("../utilities/databaseName");
 
 //gets all data from student table
 router.get("/", (req, res, next) => {
-  models.Student.findAll()
+  models.Student.findAll({
+    include: models.Campus
+  })
     .then((students) => {
       res.status(200).json({
         message: "got students",
@@ -48,16 +50,16 @@ router.delete("/:student_id", async (req, res, next) => {
 // create a new student
 router.post("/", async (req, res, next) => {
   try {
-    const { firstName, lastName, email, imageUrl, gpa, campusid } = req.body;
+    const { firstName, lastName, email, imageUrl, gpa, campusId } = req.body;
     const student = await models.Student.create({
       firstName: firstName,
       lastName: lastName,
       email: email,
       imageUrl: imageUrl,
       gpa: gpa,
-      campusId: campusid,
+      campusId: campusId,
     });
-    res.json("student was added succefully");
+    res.json(student);
   } catch (error) {
     console.error(error.message);
   }
@@ -79,6 +81,7 @@ router.put("/:student_id", async (req, res, next) => {
         email: req.body.email,
         imageUrl: req.body.imageUrl,
         gpa: req.body.gpa,
+        campusId: req.body.campusId
     });
 
     student.save();
