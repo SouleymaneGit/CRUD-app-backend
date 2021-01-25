@@ -12,6 +12,7 @@ const models = require("../database/models")
 router.get('/', async (req, res, next) => {
   try{
        await models.Campus.findAll({
+         //include students
          include:models.Student
        })
       .then (
