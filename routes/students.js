@@ -1,4 +1,5 @@
 const express = require("express");
+const { model } = require("../database/db");
 const router = express.Router();
 const models = require("../database/models");
 const { includes } = require("../utilities/databaseName");
@@ -67,36 +68,35 @@ router.post("/", async (req, res, next) => {
 
 router.put("/:student_id", async (req, res, next) => {
 
-  models.Student.findByPk(req.params.student_id)
-  .then(student => {
-      if (!student)
+  try {
+    //use include to prevent error when updating, causes error without include b/c campus object becomes undefined, however it does not display correct campus
+    const student = await models.Student.findByPk(req.params.student_id, {include: models.Campus})
+    if (!student){
       res.status(404)
       .json({
         message: "student not found"
       });
-
-    student.update({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        imageUrl: req.body.imageUrl,
-        gpa: req.body.gpa,
-        campusId: req.body.campusId
-    });
-
-    student.save();
+    }
+    await student.update({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      imageUrl: req.body.imageUrl,
+      gpa: req.body.gpa,
+      campusId: req.body.campusId,
+  });
+    await student.save();
 
     res.status(200).json({
-        message: "update success",
-        student
-    })
+      message: "update success",
+      student
   })
-  .catch(err => {
-      res.status(500).json({
-          message: "error",err
-      })
-  
-})
+
+  } catch (error) {
+    res.status(500).json({
+      message: "error",err
+  })
+  }
 })
 
 module.exports = router;
