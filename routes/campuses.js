@@ -10,10 +10,13 @@ const models = require("../database/models")
 
 
 router.get('/', async (req, res, next) => {
-  console.log("req.query", req.query);
   try{
-      const allCampuses = await models.Campus.findAll()
-          res.json(allCampuses);
+       await models.Campus.findAll({
+         include:models.Student
+       })
+      .then (
+        response => res.json(response)
+      )
       
   }catch(error){
       next(error);
